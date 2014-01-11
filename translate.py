@@ -10,8 +10,16 @@ urls = (
 )
 
 lang_abbrevs = {
-    'spanish': 'es',
-    'french': 'fr'
+    "spanish": "es",
+    "french": "fr",
+    "german": "de",
+    "chinese": "zh-CHS",
+    "dutch": "nl",
+    "catalan": "ca",
+    "czech": "cs",
+    "finnish": "fi",
+    "polish": "pl",
+    "russian": "ru"
 }
 
 app = web.application(urls, globals())
