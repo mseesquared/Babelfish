@@ -8,11 +8,27 @@
     var currLang = null;
     var supportedLangs = [
       "spanish",
-      "french"
+      "french",
+      "german",
+      "chinese",
+      "dutch",
+      "catalan",
+      "czech",
+      "finnish",
+      "polish",
+      "russian"
     ];
     var langAbbrevs = {
       "spanish": "es-US",
-      "french": "fr-FR"
+      "french": "fr-FR",
+      "german": "de-DE",
+      "chinese": "cmn-Hans-CN",
+      "dutch": "nl-NL",
+      "catalan": "ca-ES",
+      "czech": "cs-CZ"
+      "finnish": "fi-FI",
+      "polish": "pl-PL",
+      "russian": "ru-RU"
     };
 
     var listenForOrders = function() {
