@@ -5,31 +5,48 @@
     var startSound = new Audio("/aud/start.mp3");
     var stopSound = new Audio("/aud/stop.mp3");
 
-    var listenForCommand = function() {
+    var supportedLangs = [
+      "chinese"
+    ]
+
+    var listenForOrders = function() {
       listenSound.play();
-      annyang.addCommands(listenCommands);
+      annyang.addCommands(orderCommands);
     };
 
-    var startTranslating = function(language) {
-      startSound.play();
-      console.log(language);
+    var startTranslating = function(lang) {
+      lang = lang.toLowerCase();
+      if (supportedLangs.indexOf(lang) !== -1) {
+        startSound.play();
+        annyang.removeCommands(orderPhrases);
+        annyang.addCommands(translateCommands);
+      }
     };
 
     var stopTranslating = function() {
-      cancelSound.play();
-      annyang.removeCommands(listenWords);
+      stopSound.play();
+      annyang.removeCommands(orderPhrases);
+      annyang.removeCommands(translatePhrases);
     };
 
-    var triggerWord = "babelfish";
-    var triggerCommands = { "babelfish": listenForCommand };
+    var translateAndSpeak = function(line) {
+      
+    }
 
-    var listenWords = [
+    var triggerCommands = { "babelfish": listenForOrders };
+
+    var orderPhrases = [
       "start translating to *language",
       "stop translating"
     ];
-    var listenCommands = {
+    var orderCommands = {
       "start translating to *language": startTranslating,
       "stop translating": stopTranslating
+    };
+
+    var translatePhrases = [ "*line" ];
+    var translateCommands = {
+      "*line": translateAndSpeak
     };
     
     annyang.init(triggerCommands);
