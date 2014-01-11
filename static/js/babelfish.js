@@ -107,11 +107,11 @@
 
     var orderPhrases = [
       "speak *language",
-      "stop translating"
+      "stop"
     ];
     var orderCommands = {
       "speak *language": startTranslating,
-      "stop translating": stopTranslating
+      "stop": stopTranslating
     };
 
     var translatePhrases = [ "*line" ];

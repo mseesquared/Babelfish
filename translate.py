@@ -2,6 +2,7 @@ import simplejson
 import urllib2
 import urllib
 import web
+from subprocess import call
 from microsofttranslator import Translator
 
 urls = (
@@ -25,9 +26,9 @@ lang_abbrevs = {
 }
 
 lang_voices = {
-    "english": ,
-    "spanish": ,
-    "chinese": ,
+    "english": "Alex",
+    "spanish": "Javier",
+    "chinese": "Ting-Ting"
 }
 
 app = web.application(urls, globals())
@@ -41,6 +42,7 @@ class translate:
 
 class change_voice:
     def GET(self, lang):
+        call(["./change_voice.sh", "--set-default", lang_voices[lang]])
 
 
 class index:
