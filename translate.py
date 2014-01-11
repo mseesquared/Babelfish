@@ -5,7 +5,8 @@ import web
 from microsofttranslator import Translator
 
 urls = (
-        '/trans/(.*)', 'translate'
+        '/trans/(.*)', 'translate',
+        '/', 'index'
         )
 
 app = web.application(urls, globals())
@@ -17,5 +18,12 @@ class translate:
             name = "World"
         return simplejson.dumps(translator.translate(name, "es"))
 
+class index:
+    def GET(self):
+        # redirect to the static file ...
+        raise web.seeother('/static/index.html')
+
+
 if __name__ == "__main__":
     app.run();
+
