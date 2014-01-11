@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script>
+      function trans() {
+        transurl = "https://www.googleapis.com/language/translate/v2/detect";
+        transdata = {
+          "q" : "el vida del amor",
+          "key" : "AIzaSyD2A3vcvZ5rot4iBrxFG7Vup5bdI8AgQOM"
+        };
+        $.get(transurl, function(data) {
+              $("#transtext").text(data);
+            });
+      }
+    </script>
+  </head>
+  <body>
+  <button onclick="trans()">Hi</button>
+  <p id="transtext">Hi again</p>
+  </body>
+</html>
