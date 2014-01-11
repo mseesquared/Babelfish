@@ -25,7 +25,7 @@
       "chinese": "cmn-Hans-CN",
       "dutch": "nl-NL",
       "catalan": "ca-ES",
-      "czech": "cs-CZ"
+      "czech": "cs-CZ",
       "finnish": "fi-FI",
       "polish": "pl-PL",
       "russian": "ru-RU"
@@ -61,24 +61,41 @@
       $.get(route, function(data) {
         console.log(currLang);
         console.log(data);
-        data = data.replace(/\\u([a-f0-9]{4})/gi, function (n, hex) {
+        data = data.replace(/\u([a-f0-9]{4})/gi, function (n, hex) {
           return String.fromCharCode(parseInt(hex, 16));
         });
+        data = data.replace(/\\/gi, "");
+        console.log(data);
         var ssu = new SpeechSynthesisUtterance(data);
+        ssu.onend = function(){ 
+          console.log("Done!");
+          annyang.addCommands(translateCommands); 
+        };
+        ssu.onerror = function(error) {
+          console.log(error);
+          annyang.addCommands(translateCommands); 
+        }
+        ssu.onstart = function() {
+          console.log("Starting speech...");
+        }
         ssu.lang = langAbbrevs[currLang];
         speechSynthesis.speak(ssu);
-        annyang.addCommands(translateCommands);
       });
     };
 
+    var testCommands = {
+      "*line": function(line) {
+        console.log(line);
+      }
+    }
     var triggerCommands = { "babelfish": listenForOrders };
 
     var orderPhrases = [
-      "start translating to *language",
+      "speak *language",
       "stop translating"
     ];
     var orderCommands = {
-      "start translating to *language": startTranslating,
+      "speak *language": startTranslating,
       "stop translating": stopTranslating
     };
 
