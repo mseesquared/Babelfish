@@ -6,6 +6,7 @@ from microsofttranslator import Translator
 
 urls = (
     '/trans/(.*)/(.*)', 'translate',
+    '/changelang/(.*)', 'change_lang',
     '/', 'index'
 )
 
@@ -31,6 +32,10 @@ class translate:
         if not line:
             line = 'World'
         return simplejson.dumps(translator.translate(line, lang_abbrevs[lang]))
+
+class change_lang:
+    def GET(self, lang):
+        
 
 class index:
     def GET(self):
