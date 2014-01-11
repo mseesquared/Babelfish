@@ -44,7 +44,6 @@ class change_voice:
     def GET(self, lang):
         call(["./change_voice.sh", "--set-default", lang_voices[lang]])
 
-
 class index:
     def GET(self):
         raise web.seeother('/static/index.html')
