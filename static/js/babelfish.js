@@ -45,6 +45,10 @@
       if (supportedLangs.indexOf(lang) !== -1) {
         startSound.play();
         currLang = lang;
+        route = "../changevoice/" + lang;
+        $.get(route, function() {
+          console.log("system default voice successfully updated");
+        });
         annyang.removeCommands(orderPhrases);
         annyang.addCommands(translateCommands);
       }

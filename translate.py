@@ -6,7 +6,7 @@ from microsofttranslator import Translator
 
 urls = (
     '/trans/(.*)/(.*)', 'translate',
-    '/changelang/(.*)', 'change_lang',
+    '/changevoice/(.*)', 'change_voice',
     '/', 'index'
 )
 
@@ -24,6 +24,12 @@ lang_abbrevs = {
 #    "russian": "ru"
 }
 
+lang_voices = {
+    "english": ,
+    "spanish": ,
+    "chinese": ,
+}
+
 app = web.application(urls, globals())
 
 class translate:
@@ -33,9 +39,9 @@ class translate:
             line = 'World'
         return simplejson.dumps(translator.translate(line, lang_abbrevs[lang]))
 
-class change_lang:
+class change_voice:
     def GET(self, lang):
-        
+
 
 class index:
     def GET(self):
