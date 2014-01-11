@@ -35,18 +35,18 @@
       var route = "../trans/" + line;
       console.log(route)
       $.get(route, function(data) {
-        console.log("Got here!");
-        speech.text = data;
-        speech.lang = 'es';
+        console.log(data);
+        speech = new SpeechSynthesisUtterance(data);
+        speech.lang = 'es-US';
         speechSynthesis.speak(speech);
       });
     }
 
-    var testCommand = {
-      "*line": function(line) {
-        console.log(line);
-      }
-    };
+    // var testCommand = {
+    //   "*line": function(line) {
+    //     console.log(line);
+    //   }
+    // };
     var triggerCommands = { "babelfish": listenForOrders };
 
     var orderPhrases = [
