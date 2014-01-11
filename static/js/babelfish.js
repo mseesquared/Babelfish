@@ -25,7 +25,7 @@
       "chinese": "cmn-Hans-CN",
       "dutch": "nl-NL",
       "catalan": "ca-ES",
-      "czech": "cs-CZ"
+      "czech": "cs-CZ",
       "finnish": "fi-FI",
       "polish": "pl-PL",
       "russian": "ru-RU"
