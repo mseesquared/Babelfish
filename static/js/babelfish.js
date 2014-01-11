@@ -61,6 +61,9 @@
       $.get(route, function(data) {
         console.log(currLang);
         console.log(data);
+        data = data.replace(/\\u([a-f0-9]{4})/gi, function (n, hex) {
+          return String.fromCharCode(parseInt(hex, 16));
+        });
         var ssu = new SpeechSynthesisUtterance(data);
         ssu.lang = langAbbrevs[currLang];
         speechSynthesis.speak(ssu);
