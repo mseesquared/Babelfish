@@ -4,11 +4,14 @@
     var listenSound = new Audio("aud/listen.mp3");
     var startSound = new Audio("aud/start.mp3");
     var stopSound = new Audio("aud/stop.mp3");
-    var speech = new SpeechSynthesisUtterance();
 
+    var currLang = null;
     var supportedLangs = [
       "spanish"
-    ]
+    ];
+    var langAbbrevs = {
+      "spanish": "es-US"
+    };
 
     var listenForOrders = function() {
       listenSound.play();
@@ -17,9 +20,9 @@
 
     var startTranslating = function(lang) {
       lang = lang.toLowerCase();
-      console.log(lang);
       if (supportedLangs.indexOf(lang) !== -1) {
         startSound.play();
+        currLang = lang;
         annyang.removeCommands(orderPhrases);
         annyang.addCommands(translateCommands);
       }
@@ -27,26 +30,22 @@
 
     var stopTranslating = function() {
       stopSound.play();
+      currLang = null;
       annyang.removeCommands(orderPhrases);
       annyang.removeCommands(translatePhrases);
     };
 
     var translateAndSpeak = function(line) {
+      annyang.removeCommands(translatePhrases);
       var route = "../trans/" + line;
-      console.log(route)
       $.get(route, function(data) {
-        console.log(data);
-        speech = new SpeechSynthesisUtterance(data);
-        speech.lang = 'es-US';
-        speechSynthesis.speak(speech);
+        var ssu = new SpeechSynthesisUtterance(data);
+        ssu.lang = langAbbrevs[currLang];
+        speechSynthesis.speak(ssu);
+        annyang.addCommands(translateCommands);
       });
-    }
+    };
 
-    // var testCommand = {
-    //   "*line": function(line) {
-    //     console.log(line);
-    //   }
-    // };
     var triggerCommands = { "babelfish": listenForOrders };
 
     var orderPhrases = [
@@ -67,5 +66,4 @@
     annyang.start();
 
   }
-  else console.log("Fucked up!");
 })();

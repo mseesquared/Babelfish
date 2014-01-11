@@ -5,25 +5,26 @@ import web
 from microsofttranslator import Translator
 
 urls = (
-        '/trans/(.*)', 'translate',
-        '/', 'index'
-        )
+    '/trans/(.*)', 'translate',
+    '/', 'index'
+)
+
+lang_abbrevs = {
+    'spanish': 'es'
+}
 
 app = web.application(urls, globals())
 
 class translate:
-    def GET(self, name):
+    def GET(self, line):
         translator = Translator('translatewinterhack', 'm5z06/zsCyf2mtdXfVbc2pvCSDO1wF5S1VB6cDauLIE=')
-        if not name:
-            name = "World"
-        return simplejson.dumps(translator.translate(name, "es"))
+        if not line:
+            line = 'World'
+        return simplejson.dumps(translator.translate(line, 'es'))
 
 class index:
     def GET(self):
-        # redirect to the static file ...
         raise web.seeother('/static/index.html')
 
-
-if __name__ == "__main__":
-    app.run();
-
+if __name__ == '__main__':
+    app.run()
