@@ -7,6 +7,7 @@
 
     var currLang = null;
     var supportedLangs = [
+      "english",
       "spanish",
       "french",
       "german",
@@ -19,6 +20,7 @@
       "russian"
     ];
     var langAbbrevs = {
+      "english": "en-US",
       "spanish": "es-US",
       "french": "fr-FR",
       "german": "de-DE",
