@@ -7,14 +7,18 @@
 
     var currLang = null;
     var supportedLangs = [
-      "spanish"
+      "spanish",
+      "french"
     ];
     var langAbbrevs = {
-      "spanish": "es-US"
+      "spanish": "es-US",
+      "french": "fr-FR"
     };
 
     var listenForOrders = function() {
       listenSound.play();
+      currLang = null;
+      annyang.removeCommands(translatePhrases);
       annyang.addCommands(orderCommands);
     };
 
@@ -37,8 +41,10 @@
 
     var translateAndSpeak = function(line) {
       annyang.removeCommands(translatePhrases);
-      var route = "../trans/" + line;
+      var route = "../trans/" + currLang + "/" + line;
       $.get(route, function(data) {
+        console.log(currLang);
+        console.log(data);
         var ssu = new SpeechSynthesisUtterance(data);
         ssu.lang = langAbbrevs[currLang];
         speechSynthesis.speak(ssu);
