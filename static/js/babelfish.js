@@ -20,11 +20,11 @@
 //      "russian"
     ];
     var langAbbrevs = {
-      "english": "en-US",
-      "spanish": "es-US",
+      "english": "lang-en-US",
+      "spanish": "lang-es-US",
 //      "french": "fr-FR",
 //      "german": "de-DE",
-      "chinese": "cmn-Hans-CN"
+      "chinese": "lang-cmn-Hans-CN"
 //      "dutch": "nl-NL",
 //      "catalan": "ca-ES",
 //      "czech": "cs-CZ",
@@ -68,7 +68,14 @@
         });
         data = data.replace(/\\/gi, "");
         console.log(data);
-        var ssu = new SpeechSynthesisUtterance(data);
+        var ssu = new SpeechSynthesisUtterance();
+        console.log("here we go 1");
+        ssu.text = data;
+        console.log("here we go 2");
+        voices = window.speechSynthesis.getVoices();
+        ssu.voiceURI = "native";
+        ssu.voice = voices[10];
+        console.log("here we go 3");
         ssu.onend = function(){ 
           console.log("Done!");
           annyang.addCommands(translateCommands); 
@@ -81,6 +88,8 @@
           console.log("Starting speech...");
         }
         ssu.lang = langAbbrevs[currLang];
+        console.log("here we go 4");
+        console.log(ssu);
         speechSynthesis.speak(ssu);
       });
     };
