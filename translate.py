@@ -10,6 +10,7 @@ urls = (
 )
 
 lang_abbrevs = {
+    "english": "en",
     "spanish": "es",
     "french": "fr",
     "german": "de",
